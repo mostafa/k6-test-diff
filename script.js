@@ -3,6 +3,7 @@ import file from "k6/x/file";
 import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 import deepdiff from "https://cdnjs.cloudflare.com/ajax/libs/deep-diff/1.0.2/deep-diff.min.js";
 import { detailedDiff } from "./dof.bundle.js";
+import { printDiff } from "./print.js";
 
 let baselineFile = null;
 
@@ -21,12 +22,15 @@ export function handleSummary(data) {
 
     if (baselineFile !== null) {
         console.log("Comparing the current test to the baseline...");
-        const jsonDiff = JSON.stringify(deepdiff.diff(baselineFile, data));
+        const diff = deepdiff.diff(baselineFile, data);
+        const jsonDiff = JSON.stringify(diff);
         file.writeString("diff.json", jsonDiff);
 
         console.log("Generate a detailed diff report...");
         const jsonObjDiff = JSON.stringify(detailedDiff(baselineFile, data));
         file.writeString("detailed-diff.json", jsonObjDiff);
+
+        console.log("\n" + printDiff(diff) + "\n");
     }
 
     let fileName = baselineFile === null ? "baseline.json" : "next.json";
