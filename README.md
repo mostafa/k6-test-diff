@@ -21,4 +21,4 @@ The first time the `baseline.json` doesn't exist, so the test will create it wit
 3. `diff.json`: the diff of two result summaries between `baseline.json` and `next.json`.
 4. `detailed-diff.json`: the diff of updated values between `baseline.json` and `next.json`.
 
-Note that before running the script, you need to go into the `deep-object-diff` directory and run `yarn` to install the dependencies. Then you'll be able to run `yarn run bundle` to build the `deep-object-diff/dist/dof.bundle.js` file needed for the `script.js` to generate the `detailed-diff.json` file.
+Note that before running the script, you need to go into the `deep-object-diff` directory and run `yarn` to install the dependencies. Then you'll be able to run `yarn run bundle` to build the `deep-object-diff/dist/dof.bundle.js` file needed for the `script.js` to generate the `detailed-diff.json` file. I already built it and bundled it here.
