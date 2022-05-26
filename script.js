@@ -2,7 +2,7 @@ import http from "k6/http";
 import file from "k6/x/file";
 import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 import deepdiff from "https://cdnjs.cloudflare.com/ajax/libs/deep-diff/1.0.2/deep-diff.min.js";
-import { detailedDiff } from "./dof.bundle.js";
+import { detailedDiff } from "./deep-object-diff/dist/dof.bundle.js";
 
 let baselineFile = null;
 

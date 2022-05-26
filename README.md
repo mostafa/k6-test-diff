@@ -14,7 +14,11 @@ And then run two tests using this command.
 ./k6 run script.js
 ```
 
-The first time the `baseline.json` doesn't exist, so the test will create it with the `handleSummary` function. The second time the `baseline.json` exists, so the `handleSummary` will compare the current test results against the baseline test and store two files:
+The first time the `baseline.json` doesn't exist, so the test will create it with the `handleSummary` function. The second time the `baseline.json` exists, so the `handleSummary` will compare the current test results, `next.json` against the baseline test and store a few files:
 
-1) `diff.json`: contains the diff of two result summaries.
-2) `detailed-diff.json`: contains the diff of updated values in the second test's result summary against the baseline.
+1. `baseline.json`: the result summary of the baseline test.
+2. `next.json`: the results summary of the further tests.
+3. `diff.json`: the diff of two result summaries between `baseline.json` and `next.json`.
+4. `detailed-diff.json`: the diff of updated values between `baseline.json` and `next.json`.
+
+Note that before running the script, you need to go into the `deep-object-diff` directory and run `yarn` to install the dependencies. Then you'll be able to run `yarn run bundle` to build the `deep-object-diff/dist/dof.bundle.js` file needed for the `script.js` to generate the `detailed-diff.json` file.
