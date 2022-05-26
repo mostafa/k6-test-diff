@@ -3,7 +3,7 @@ import file from "k6/x/file";
 import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 import deepdiff from "https://cdnjs.cloudflare.com/ajax/libs/deep-diff/1.0.2/deep-diff.min.js";
 import { detailedDiff } from "./dof.bundle.js";
-import { printDiff } from "./print.js";
+import { printDiff } from "./diff.js";
 
 let baselineFile = null;
 
@@ -30,7 +30,9 @@ export function handleSummary(data) {
         const jsonObjDiff = JSON.stringify(detailedDiff(baselineFile, data));
         file.writeString("detailed-diff.json", jsonObjDiff);
 
-        console.log("\n" + printDiff(diff) + "\n");
+        // Only print the diff if the threshold is not met,
+        // i.e. the diff is above 1%
+        console.log("\n" + printDiff(diff, 1) + "\n");
     }
 
     let fileName = baselineFile === null ? "baseline.json" : "next.json";

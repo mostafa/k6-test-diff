@@ -3,7 +3,7 @@ const GREEN = "\u001b[32m";
 const TEAL = "\u001b[36m";
 const RESET = "\u001b[0m";
 
-export function printDiff(diff) {
+export function printDiff(diff, threshold_percentage) {
     let result = "";
 
     if (diff.length === 0) {
@@ -19,15 +19,22 @@ export function printDiff(diff) {
         const path = d.path.join(".");
         const rhs = d.rhs === null ? "---" : d.rhs;
         const lhs = d.lhs === null ? "---" : d.lhs;
+        let pd = percentDiff(rhs, lhs);
 
         switch (d.kind) {
             case "E":
-                result += `${TEAL}@@ ${path} @@${TEAL}\n`;
-                result += `${RED}+${rhs}${RESET}\n`;
-                result += `${GREEN}-${lhs}${RESET}\n`;
+                if (threshold_percentage !== undefined && pd > threshold_percentage) {
+                    result += `${TEAL}@@ ${path} ${Math.round(pd)}% @@${TEAL}\n`;
+                    result += `${RED}-${rhs}${RESET}\n`;
+                    result += `${GREEN}+${lhs}${RESET}\n`;
+                }
                 break;
         }
     });
 
     return result;
+}
+
+export function percentDiff(rhs, lhs) {
+    return (lhs * 100) / rhs - 100;
 }
