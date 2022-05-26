@@ -1,6 +1,6 @@
 # k6-diff-test
 
-This repository contains scripts to show how to create a baseline test and then compare the results with further tests (of the same script). It uses [deep-diff](https://github.com/flitbit/diff) and [deep-object-diff](https://github.com/mattphillips/deep-object-diff) libraries to determine the difference between your baseline test's end-of-test summary and your current one.
+This repository contains scripts to show how to create a baseline test and then compare the results with further tests (of the same script). It uses [deep-diff](https://github.com/flitbit/diff) and [deep-object-diff](https://github.com/mostafa/deep-object-diff) libraries to determine the difference between your baseline test's end-of-test summary and your current one.
 
 I also use the [xk6-file](https://github.com/avitalique/xk6-file) extension to write the diffs into JSON files and you can build a k6 binary with this command:
 
