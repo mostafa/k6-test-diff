@@ -1,0 +1,4 @@
+[submodule "deep-object-diff"]
+	path = deep-object-diff
+	url = git@github.com:mattphillips/deep-object-diff.git
+	branch = main
